@@ -15,7 +15,7 @@ export class Branch extends BaseEntity {
   id: number;
 
   @Column()
-  code: string;
+  branch_code: string;
 
   @Column()
   name: string;

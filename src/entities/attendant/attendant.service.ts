@@ -46,6 +46,7 @@ export class AttendantService {
     attendant.branch = [branch];
     console.log({ attendant });
     return this.attendantRepository.save(attendant);
+    
   }
 
   async update(

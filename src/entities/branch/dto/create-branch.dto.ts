@@ -7,7 +7,7 @@ export class CreateBranchDto {
   id: number;
 
   @IsString()
-  code: string;
+  branch_code: string;
 
   @IsString()
   name: string;

@@ -35,7 +35,7 @@ export class BranchService {
 
   async create(_branch: CreateBranchDto): Promise<Branch> {
     const branch = new Branch();
-    branch.code = _branch.code;
+    branch.branch_code = _branch.branch_code;
     branch.name = _branch.name;
     branch.address = _branch.address;
 
@@ -57,8 +57,8 @@ export class BranchService {
       branch,
       updateBranchDto,
     });
-    const { code, name, address } = updateBranchDto;
-    branch.code = code;
+    const { branch_code, name, address } = updateBranchDto;
+    branch.branch_code = branch_code;
     branch.name = name;
     branch.address = address;
     branch.attendant = [attendant];
