@@ -35,15 +35,16 @@ export class BranchService {
 
   async create(_branch: CreateBranchDto): Promise<Branch> {
     const branch = new Branch();
-    branch.branch_code = _branch.branch_code;
+    branch.code = _branch.code;
     branch.name = _branch.name;
     branch.address = _branch.address;
 
-    const attendant = await this.attendantRepository.findOne({
-      where: { id: parseInt(_branch.attendant) },
-    });
-    branch.attendant = [attendant];
-    console.log({ attendant });
+    if(_branch.attendant_ID) {
+      const attendant = await this.attendantRepository.findOne({
+        where: { id: _branch.attendant_ID },
+      });
+      branch.attendant = [attendant];
+    }
 
     return this.branchRepository.save(branch);
   }
@@ -57,8 +58,8 @@ export class BranchService {
       branch,
       updateBranchDto,
     });
-    const { branch_code, name, address } = updateBranchDto;
-    branch.branch_code = branch_code;
+    const { code, name, address } = updateBranchDto;
+    branch.code = code;
     branch.name = name;
     branch.address = address;
     branch.attendant = [attendant];

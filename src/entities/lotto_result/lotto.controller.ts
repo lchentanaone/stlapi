@@ -16,34 +16,34 @@ import {
   export class LottoController {
     constructor(private lottoService: LottoService) {}
   
-    // @Get()
-    // async findAll() {
-    //   // return this.lottoService.findAll();
-    // }
+    @Get()
+    async findAll() {
+      return this.lottoService.findAll();
+    }
   
-    // @Get(':id')
-    // async findbyOne(@Param('id') id: number) {
-    //   return this.lottoService.findbyOne(+id);
-    // }
+    @Get(':id')
+    async findOne(@Param('id') id: number) {
+      return this.lottoService.findOne(+id);
+    }
   
     @Post()
     create(@Body() createLottoDto: CreateLottoDto) {
       return this.lottoService.create(createLottoDto);
     }
   
-    // @Patch(':id')
-    // update(
-    //   @Param('id') id: number,
-    //   @Body() updateLottoDto: UpdateLottoDto,
-    // ) {
-    //   this.lottoService.update(+id, updateLottoDto);
-    //   return 'Updated';
-    // }
+    @Patch(':id')
+    update(
+      @Param('id') id: string,
+      @Body() updateLottoDto: UpdateLottoDto,
+    ) {
+      this.lottoService.update(+id, updateLottoDto);
+      return 'Updated';
+    }
   
-    // @Delete(':id')
-    // remove(@Param('id') id: number ) {
-    //   this.lottoService.remove(+id);
-    //   return 'Deleted!';
-    // }
+    @Delete(':id')
+    remove(@Param('id') id: string ) {
+      this.lottoService.remove(+id);
+      return 'Deleted!';
+    }
   }
   

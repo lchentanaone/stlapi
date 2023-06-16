@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-
 import { Journal } from './journal.entity';
 import { CreateJournalDto } from './dto/create-journal.dto';
 import { UpdateJournalDto } from './dto/update-journal.dto';
@@ -24,7 +22,7 @@ export class JournalService {
     
       findAll(): Promise<Journal[]> {
         return this.journalRepository.find({
-          relations: ['journal'],
+          // relations: ['branch']
         });
       }
     

@@ -29,7 +29,7 @@ import {
     // @ManyToMany(() => Branch, (branch) => branch.attendant)
     // branch: Branch[];
   
-    @CreateDateColumn()
-    createdAt: Date;
+    // @CreateDateColumn()
+    // createdAt: Date;
   }
   

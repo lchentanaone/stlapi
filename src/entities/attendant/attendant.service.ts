@@ -40,10 +40,10 @@ export class AttendantService {
     attendant.username = _attendant.username;
     attendant.password = _attendant.password;
 
-    const branch = await this.branchRepository.findOne({
-      where: { id: parseInt(_attendant.branch) },
-    });
-    attendant.branch = [branch];
+    // const branch = await this.branchRepository.findOne({
+    //   where: { id: parseInt(_attendant.branch) },
+    // });
+    // attendant.branch = [branch];
     console.log({ attendant });
     return this.attendantRepository.save(attendant);
     

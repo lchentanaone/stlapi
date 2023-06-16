@@ -6,6 +6,8 @@ import {
     JoinTable,
     BaseEntity,
   } from 'typeorm';
+import { User } from '../user/user.entity';
+
   
 @Entity({ name: 'tapada' })
   export class Tapada extends BaseEntity {
@@ -24,5 +26,7 @@ import {
     @Column()
     draw_time: string; 
 
+    // @ManyToMany(() => User, (user) => user.tapada)
+    // user_id: User[];
    
   }

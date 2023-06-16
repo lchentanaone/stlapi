@@ -10,8 +10,8 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   // @IsString()
   // branch_code: string;
 
-  // @IsString()
-  // attendant_id: string;
+  @IsString()
+  attendant: string;
 
   @IsString()
   username: string;

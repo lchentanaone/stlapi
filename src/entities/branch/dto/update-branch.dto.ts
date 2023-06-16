@@ -7,7 +7,7 @@ export class UpdateBranchDto extends PartialType(CreateBranchDto) {
   id: number;
 
   @IsString()
-  branch_code: string;
+  code: string;
 
   @IsString()
   name: string;

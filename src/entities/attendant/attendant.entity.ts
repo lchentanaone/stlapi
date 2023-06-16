@@ -29,4 +29,5 @@ export class Attendant extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+  user: any;
 }

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsString, IsInt, IsDate } from '@nestjs/class-validator';
+import { IsString, IsInt, IsDate, IsIn } from '@nestjs/class-validator';
 import { Branch } from 'src/entities/branch/branch.entity';
 
 export class CreateBranchDto {
@@ -7,7 +7,7 @@ export class CreateBranchDto {
   id: number;
 
   @IsString()
-  branch_code: string;
+  code: string;
 
   @IsString()
   name: string;
@@ -15,8 +15,8 @@ export class CreateBranchDto {
   @IsString()
   address: string;
 
-  @IsString()
-  attendant: string;
+  @IsInt()
+  attendant_ID: number;
 
   @IsDate()
   createdAt: Date;

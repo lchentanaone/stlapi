@@ -8,17 +8,20 @@ import {
     JoinTable,
     BaseEntity,
   } from 'typeorm';
+import { Attendant } from '../attendant/attendant.entity';
   
+
   @Entity({ name: 'user' })
   export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
-  
-    // @Column()
-    // branch_code: string;
-    
-    // @Column()
-    // attendant_id: string;
+
+    // @ManyToMany(() => Branch, (branch) => branch.user)
+    // branch: Branch[];
+
+    @ManyToMany(() => Attendant, (attendant) => attendant.user)
+    @JoinTable()
+    attendant: Attendant[];
 
     @Column()
     username: string;
@@ -48,10 +51,5 @@ import {
     createdAt: Date;
 
 
-    // @ManyToMany(() => Attendant, (attendant) => attendant.user)
-    // attendant: Attendant[];
-
-    // @ManyToMany(() => Branch, (branch) => branch.user)
-    // branch: Branch[];
   }
   

@@ -20,7 +20,7 @@ export class AccountingService {
     
       findAll(): Promise<Accounting[]> {
         return this.accountingRepository.find({
-          relations: ['accounting'],
+          // relations: ['accounting'],
         });
       }
     

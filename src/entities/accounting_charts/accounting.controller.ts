@@ -16,34 +16,34 @@ import {
   export class AccountingController {
     constructor(private accountingService: AccountingService) {}
   
-    // @Get()
-    // async fillAll() {
-    //   return this.betsService.findAll();
-    // }
+    @Get()
+    async findAll() {
+      return this.accountingService.findAll();
+    }
   
-    // @Get(':id')
-    // async findbyOne(@Param('id') id: number) {
-    //   return this.betsService.findbyOne(+id);
-    // }
+    @Get(':id')
+    async findOne(@Param('id') id: number) {
+      return this.accountingService.findOne(+id);
+    }
   
     @Post()
     create(@Body() createAccountingDto: CreateAccountingDto) {
       return this.accountingService.create(createAccountingDto);
     }
   
-    // @Patch(':id')
-    // update(
-    //   @Param('id') id: number,
-    //   @Body() updateBetsDto: UpdateBetsDto,
-    // ) {
-    //   this.betsService.update(+id, updateBetsDto);
-    //   return 'Updated';
-    // }
+    @Patch(':id')
+    update(
+      @Param('id') id: string,
+      @Body() updateAccountingDto: UpdateAccountingDto,
+    ) {
+      this.accountingService.update(+id, updateAccountingDto);
+      return 'Updated';
+    }
   
-    // @Delete(':id')
-    // remove(@Param('id') id: number) {
-    //   this.betsService.remove(+id);
-    //   return 'Deleted!';
-    // }
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+      this.accountingService.remove(+id);
+      return 'Deleted!';
+    }
   }
   

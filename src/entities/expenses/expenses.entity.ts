@@ -21,9 +21,5 @@ import {
     @Column()
     type: string;
 
-    @Column()
-    user_id: number; //FK
 
-
-   
   }

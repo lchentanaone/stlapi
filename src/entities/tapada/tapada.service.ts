@@ -20,7 +20,7 @@ export class TapadaService {
     
       findAll(): Promise<Tapada[]> {
         return this.tapadaRepository.find({
-          relations: ['tapada'],
+          // relations: ['user'],
         });
       }
     
@@ -41,11 +41,11 @@ export class TapadaService {
         tapada.amount = _tapada.amount;
         tapada.draw_time = _tapada.draw_time;
     
-        // const attendant = await this.attendantRepository.findOne({
-        //   where: { id: parseInt(_user.attendant) },
+        // const user = await this.userRepository.findOne({
+        //   where: { id: parseInt(_tapada.user) },
         // });
-        // user.attendant = [attendant];
-        // console.log({ user });
+        // tapada.user = [user];
+        // console.log({ tapada });
         return this.tapadaRepository.save(tapada);
       }
     
@@ -54,8 +54,8 @@ export class TapadaService {
         updateTapadaDto: UpdateTapadaDto,
       ): Promise<Tapada> {
         const tapada = await this.findOne(id);
-        // const attendant = await this.attendantRepository.findOne({
-        //   where: { id: parseInt(updateUserDto.attendant) },
+        // const user = await this.userRepository.findOne({
+        //   where: { id: parseInt(updateTapadaDto.user) },
         // });
         console.log({
           tapada,
@@ -67,7 +67,7 @@ export class TapadaService {
         tapada.amount = amount;
         tapada.draw_time = draw_time;
 
-        // tapada.user = [User];
+        // tapada.user_id = [User];
     
         return await tapada.save();
       }

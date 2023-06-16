@@ -16,34 +16,34 @@ import {
   export class UserController {
     constructor(private userService: UserService) {}
   
-    // @Get()
-    // async findAll() {
-    //   return this.userService.findAll();
-    // }
+    @Get()
+    async findAll() {
+      return this.userService.findAll();
+    }
   
-    // @Get(':id')
-    // async findbyOne(@Param('id') id: number) {
-    //   return this.userService.findbyOne(+id);
-    // }
+    @Get(':id')
+    async findOne(@Param('id') id: number) {
+      return this.userService.findOne(+id);
+    }
   
     @Post()
     create(@Body() createUserDto: CreateUserDto) {
       return this.userService.create(createUserDto);
     }
   
-    // @Patch(':id')
-    // update(
-    //   @Param('id') id: number,
-    //   @Body() updateUserDto: UpdateUserDto,
-    // ) {
-    //   this.userService.update(+id, updateUserDto);
-    //   return 'Updated';
-    // }
+    @Patch(':id')
+    update(
+      @Param('id') id: string,
+      @Body() updateUserDto: UpdateUserDto,
+    ) {
+      this.userService.update(+id, updateUserDto);
+      return 'Updated';
+    }
   
-    // @Delete(':id')
-    // remove(@Param('id') id: number) {
-    //   this.userService.remove(+id);
-    //   return 'Deleted!';
-    // }
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+      this.userService.remove(+id);
+      return 'Deleted!';
+    }
   }
   
