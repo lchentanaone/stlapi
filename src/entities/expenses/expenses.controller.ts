@@ -7,14 +7,22 @@ import {
     Delete,
     Patch,
     Res,
+    Inject,
+    forwardRef,
   } from '@nestjs/common';
   import { CreateExpensesDto } from './dto/create-expenses.dto';
   import { UpdateExpensesDto } from './dto/update-expenses.dto';
   import { ExpensesService } from './expenses.service';
+  import { UserService } from '../user/user.service';
+
   
   @Controller('expenses')
   export class ExpensesController {
-    constructor(private expensesService: ExpensesService) {}
+    constructor(
+      private expensesService: ExpensesService,
+      @Inject(forwardRef(() => UserService))
+      private readonly userService: UserService,
+    ) {}
   
     @Get()
     async findAll() {

@@ -14,13 +14,13 @@ export class BetsService {
   constructor( 
     @InjectRepository(Bets)
     private betsRepository: BetsRepository,
-    // @InjectRepository(User)
-    // private userRepository: UserRepository,
+    @InjectRepository(User)
+    private userRepository: UserRepository,
   ) {}
 
-  async findAll(): Promise<Bets[]> {
+  findAll(): Promise<Bets[]> {
     return this.betsRepository.find({
-      // relations: ['user_id'],
+      relations: ['user'],
     });
   }
 
@@ -29,7 +29,7 @@ export class BetsService {
       where: {
         id: id,
       },
-      // relations: ['user_id']
+      relations: ['user']
     });
     return x;
   }
@@ -42,37 +42,38 @@ export class BetsService {
     bets.number = _bets.number;
     bets.amount = _bets.amount;
    
-    // const user = await this.userRepository.findOne({
-    //   where: { id: parseInt(_bets.user_id) },
-    // });
-    // bets.user = [user];
-    // console.log({ user });
+    if(_bets.user_ID) {
+      const user = await this.userRepository.findOne({
+        where: { id: _bets.user_ID},
+      });
+      bets.user = [user];
+    }
     return this.betsRepository.save(bets);
   }
 
-  // async update(
-  //   id: number,
-  //   updateBetsDto: UpdateBetsDto,
-  // ): Promise<Bets> {
-  //   const bets = await this.findOne(id);
-  //   const user = await this.betsRepository.findOne({
-  //     where: { id: parseInt(updateBetsDto.bets) },
-  //   });
-  //   console.log({
-  //     bets,
-  //     updateBetsDto,
-  //   });
-  //   const { draw_time, game_mode, number } = updateBetsDto;
-  //   bets.draw_time = draw_time;
-  //   bets.game_mode = game_mode;
-  //   bets.number = number;
+  async update(
+    id: number,
+    updateBetsDto: UpdateBetsDto,
+  ): Promise<Bets> {
+    const bets = await this.findOne(id);
+    // const user = await this.userRepository.findOne({
+    //   where: { id: updateBetsDto.user },
+    // });
+    // console.log({
+    //   bets,
+    //   updateBetsDto,
+    // });
+    // const { draw_time, game_mode, number } = updateBetsDto;
+    // bets.draw_time = draw_time;
+    // bets.game_mode = game_mode;
+    // bets.number = number;
 
     // bets.id = [user];
 
-  //   return await bets.save();
-  // }
+    return await bets.save();
+  }
 
-  // async remove(id: number): Promise<void> {
-  //   await this.betsRepository.delete(id);
-  // }
+  async remove(id: number): Promise<void> {
+    await this.betsRepository.delete(id);
+  }
 }

@@ -8,14 +8,21 @@ import {
   Delete,
   Patch,
   Res,
+  forwardRef,
+  Inject,
 } from '@nestjs/common';
-import { CreateAttendantDto } from './dto/create-attendant.dto';
-import { UpdateAttendantDto } from './dto/update-attendant.dto';
 import { AttendantService } from './attendant.service';
+import { UpdateAttendantDto } from './dto/update-attendant.dto';
+import { CreateAttendantDto } from './dto/create-attendant.dto';
+import { BranchService } from '../branch/branch.service';
 
 @Controller('attendant')
 export class AttendantController {
-  constructor(private attendantService: AttendantService) {}
+  constructor(
+    private attendantService: AttendantService,
+    @Inject(forwardRef(() => BranchService))
+    private readonly branchService: BranchService,
+  ) {}
 
   @Get()
   async fillAll() {

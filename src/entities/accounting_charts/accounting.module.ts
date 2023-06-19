@@ -4,15 +4,24 @@ import { AccountingService } from './accounting.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Accounting } from './accounting.entity';
 import { AccountingRepository } from './accounting.repository';
+import { Journal } from '../journal/journal.entity';
+import { JournalRepository } from '../journal/journal.repository';
+import { JournalService } from '../journal/journal.service';
+import { BranchRepository } from '../branch/branch.repository';
+import { Branch } from '../branch/branch.entity';
 
 @Module({
   imports: [
       TypeOrmModule.forFeature([
       Accounting,
       AccountingRepository,
+      Journal,
+      JournalRepository,
+      Branch,
+      BranchRepository
     ]),
   ],
   controllers: [AccountingController],
-  providers: [AccountingService]
+  providers: [AccountingService, JournalService]
 })
 export class AccountingModule {}

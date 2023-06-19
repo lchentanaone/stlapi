@@ -14,8 +14,8 @@ export class CreateExpensesDto {
   @IsOptional()
   type: string;
 
-  // @IsInt()
-  // user_id: number; 
+  @IsInt()
+  user_ID: number; 
 
   @IsDate()
   createdAt: Date;

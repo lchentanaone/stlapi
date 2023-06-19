@@ -9,6 +9,8 @@ import {
   BaseEntity,
 } from 'typeorm';
 import { Branch } from '../branch/branch.entity';
+import { User } from '../user/user.entity';
+
 
 @Entity({ name: 'attendant' })
 export class Attendant extends BaseEntity {
@@ -27,7 +29,9 @@ export class Attendant extends BaseEntity {
   @ManyToMany(() => Branch, (branch) => branch.attendant)
   branch: Branch[];
 
+  @ManyToMany(() => User, (user) => user.attendant)
+  user: User[];
+
   @CreateDateColumn()
   createdAt: Date;
-  user: any;
 }

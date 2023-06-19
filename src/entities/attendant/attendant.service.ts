@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { Attendant } from './attendant.entity';
-import { CreateAttendantDto } from './dto/create-attendant.dto';
 import { AttendantRepository } from './attendant.repository';
+import { CreateAttendantDto } from './dto/create-attendant.dto';
 import { UpdateAttendantDto } from './dto/update-attendant.dto';
+
 import { Branch } from '../branch/branch.entity';
 import { BranchRepository } from '../branch/branch.repository';
 
@@ -40,12 +40,13 @@ export class AttendantService {
     attendant.username = _attendant.username;
     attendant.password = _attendant.password;
 
-    // const branch = await this.branchRepository.findOne({
-    //   where: { id: parseInt(_attendant.branch) },
-    // });
-    // attendant.branch = [branch];
-    console.log({ attendant });
-    return this.attendantRepository.save(attendant);
+    if(_attendant.branch_ID) {
+      const branch = await this.branchRepository.findOne({
+        where: { id: _attendant.branch_ID},
+      });
+      attendant.branch = [branch];
+    }
+      return this.attendantRepository.save(attendant);
     
   }
 

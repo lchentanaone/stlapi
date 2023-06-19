@@ -14,13 +14,13 @@ export class TapadaService {
     constructor(
         @InjectRepository(Tapada)
         private tapadaRepository: TapadaRepository,
-        // @InjectRepository(User)
-        // private userRepository: UserRepository,
+        @InjectRepository(User)
+        private userRepository: UserRepository,
       ) {}
     
       findAll(): Promise<Tapada[]> {
         return this.tapadaRepository.find({
-          // relations: ['user'],
+          relations: ['user'],
         });
       }
     
@@ -29,7 +29,7 @@ export class TapadaService {
           where: {
             id: id,
           },
-          // relations: ['user']
+          relations: ['user']
         });
         return x;
       }
@@ -41,11 +41,13 @@ export class TapadaService {
         tapada.amount = _tapada.amount;
         tapada.draw_time = _tapada.draw_time;
     
-        // const user = await this.userRepository.findOne({
-        //   where: { id: parseInt(_tapada.user) },
-        // });
-        // tapada.user = [user];
-        // console.log({ tapada });
+        if(_tapada.user_ID) {
+          const user = await this.userRepository.findOne({
+            where: { id: _tapada.user_ID},
+          });
+          tapada.user = [user];
+        }
+    
         return this.tapadaRepository.save(tapada);
       }
     

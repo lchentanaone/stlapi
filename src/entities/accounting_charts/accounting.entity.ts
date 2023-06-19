@@ -8,6 +8,7 @@ import {
     JoinTable,
     BaseEntity,
   } from 'typeorm';
+import { Journal } from '../journal/journal.entity';
   
   @Entity({ name: 'accounting' })
   export class Accounting extends BaseEntity {
@@ -26,10 +27,8 @@ import {
     @Column()
     type: string;
    
-    // @ManyToMany(() => Branch, (branch) => branch.attendant)
-    // branch: Branch[];
-  
-    // @CreateDateColumn()
-    // createdAt: Date;
+    @ManyToMany(() => Journal, (journal) => journal.accounting)
+    journal: Journal[];
+
   }
   

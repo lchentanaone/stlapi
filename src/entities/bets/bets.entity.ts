@@ -6,7 +6,9 @@ import {
     PrimaryGeneratedColumn,
     JoinTable,
     BaseEntity,
+    ManyToMany,
   } from 'typeorm';
+  import { User } from '../user/user.entity';
   
   @Entity({ name: 'bets' })
   export class Bets extends BaseEntity {
@@ -28,8 +30,9 @@ import {
     @Column()
     amount: number;
 
-    // @Column()
-    // user_id: number;
+    @ManyToMany(() => User, (user) => user.bets)
+    @JoinTable()
+    user: User[];
 
   }
   

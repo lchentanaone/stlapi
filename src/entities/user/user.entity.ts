@@ -9,19 +9,33 @@ import {
     BaseEntity,
   } from 'typeorm';
 import { Attendant } from '../attendant/attendant.entity';
-  
+import { Branch } from '../branch/branch.entity';
+import { Bets } from '../bets/bets.entity';
+import { Expenses } from '../expenses/expenses.entity';
+import { Tapada } from '../tapada/tapada.entity';
+
 
   @Entity({ name: 'user' })
   export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // @ManyToMany(() => Branch, (branch) => branch.user)
-    // branch: Branch[];
+    @ManyToMany(() => Branch, (branch) => branch.user)
+    @JoinTable()
+    branch: Branch[];
 
     @ManyToMany(() => Attendant, (attendant) => attendant.user)
     @JoinTable()
     attendant: Attendant[];
+
+    @ManyToMany(() => Bets, (bets) => bets.user)
+    bets: Bets[];
+
+    @ManyToMany(() => Expenses, (expenses) => expenses.user)
+    expenses: Expenses[];
+
+    @ManyToMany(() => Tapada, (tapada) => tapada.user)
+    tapada: Tapada [];
 
     @Column()
     username: string;

@@ -7,14 +7,26 @@ import {
     Delete,
     Patch,
     Res,
+    Inject,
+    forwardRef
   } from '@nestjs/common';
+  import { UserService } from './user.service';
   import { CreateUserDto } from './dto/create-user.dto';
   import { UpdateUserDto } from './dto/update-user.dto';
-  import { UserService } from './user.service';
+  import { BranchService } from '../branch/branch.service';
+  import { AttendantService } from '../attendant/attendant.service';
+  import { BetsService } from '../bets/bets.service';
   
   @Controller('user')
   export class UserController {
-    constructor(private userService: UserService) {}
+    constructor(
+      private userService: UserService,
+      @Inject(forwardRef(() => BranchService))
+      private readonly branchService: BranchService,
+      @Inject(forwardRef(() => AttendantService))
+      private readonly attendantService: AttendantService,
+
+    ) {}
   
     @Get()
     async findAll() {

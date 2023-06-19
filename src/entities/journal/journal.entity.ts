@@ -5,8 +5,11 @@ import {
     PrimaryGeneratedColumn,
     JoinTable,
     BaseEntity,
+    ManyToMany,
   } from 'typeorm';
-  
+import { Branch } from '../branch/branch.entity';
+import { Accounting } from '../accounting_charts/accounting.entity';
+
 @Entity({ name: 'journal' })
   export class Journal extends BaseEntity {
     @PrimaryGeneratedColumn()
@@ -15,8 +18,9 @@ import {
     @Column()
     date: string;
 
-    // @Column()
-    // branch_code: number; // FK
+    @ManyToMany(() => Branch, (branch) => branch.journal)
+    @JoinTable()
+    branch: Branch[];
 
     @Column()
     description: string;
@@ -24,8 +28,9 @@ import {
     @Column()
     type: string; 
 
-    // @Column()
-    // accounting_chart: string; 
+    @ManyToMany(() => Accounting, (accounting) => accounting.journal)
+    @JoinTable()
+    accounting: Accounting[];
 
     @Column()
     amount: number; 

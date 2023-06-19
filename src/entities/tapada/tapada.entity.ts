@@ -5,6 +5,7 @@ import {
     PrimaryGeneratedColumn,
     JoinTable,
     BaseEntity,
+    ManyToMany,
   } from 'typeorm';
 import { User } from '../user/user.entity';
 
@@ -26,7 +27,8 @@ import { User } from '../user/user.entity';
     @Column()
     draw_time: string; 
 
-    // @ManyToMany(() => User, (user) => user.tapada)
-    // user_id: User[];
+    @ManyToMany(() => User, (user) => user.tapada)
+    @JoinTable()
+    user: User[];
    
   }

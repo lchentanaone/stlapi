@@ -5,11 +5,14 @@ export class CreateUserDto {
   @IsInt()
   id: number;
 
-  // @IsString()
-  // branch_code: string;
+  @IsInt()
+  branch_ID: number;
 
-  @IsString()
-  attendant: string;
+  @IsInt()
+  attendant_ID: number;
+
+  @IsInt()
+  bets_ID: number;
 
   @IsString()
   username: string;

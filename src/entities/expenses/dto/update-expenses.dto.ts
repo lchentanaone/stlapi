@@ -14,7 +14,9 @@ export class UpdateExpensesDto extends PartialType(CreateExpensesDto) {
   
     @IsOptional()
     type: string;
-  
+
+    @IsInt()
+    user_ID: number; 
   
     @IsDate()
     createdAt: Date;

@@ -7,14 +7,24 @@ import {
     Delete,
     Patch,
     Res,
+    Inject,
+    forwardRef,
   } from '@nestjs/common';
   import { CreateJournalDto } from './dto/create-journal.dto';
   import { UpdateJournalDto } from './dto/update-journal.dto';
   import { JournalService } from './journal.service';
+  import { BranchService } from '../branch/branch.service';
+  import { AccountingService } from '../accounting_charts/accounting.service';
   
   @Controller('journal')
   export class JournalController {
-    constructor(private journalService: JournalService) {}
+    constructor(
+      private journalService: JournalService,
+      @Inject(forwardRef(() => BranchService))
+      private readonly branchService: BranchService,
+      @Inject(forwardRef(() => AccountingService))
+      private readonly accountingService: AccountingService,
+    ) {}
   
     @Get()
     async findAll() {

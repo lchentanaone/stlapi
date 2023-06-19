@@ -14,15 +14,15 @@ export class JournalService {
     constructor(
         @InjectRepository(Journal)
         private journalRepository: JournalRepository,
-        // @InjectRepository(Branch)
-        // private branchRepository: BranchRepository,
-        // @InjectRepository(Accounting)
-        // private accountingRepository: AccountingRepository,
+        @InjectRepository(Branch)
+        private branchRepository: BranchRepository,
+        @InjectRepository(Accounting)
+        private accountingRepository: AccountingRepository,
       ) {}
     
       findAll(): Promise<Journal[]> {
         return this.journalRepository.find({
-          // relations: ['branch']
+          relations: ['branch', 'accounting']
         });
       }
     
@@ -31,7 +31,7 @@ export class JournalService {
           where: {
             id: id,
           },
-          // relations: ['user']
+          relations: ['branch', 'accounting']
         });
         return x;
       }
@@ -43,11 +43,20 @@ export class JournalService {
         journal.type = _journal.type;
         journal.amount = _journal.amount;
     
-        // const journal = await this.journalRepository.findOne({
-        //   where: { id: parseInt(_user.journal) },
-        // });
-        // user.journal = [journal];
-        // console.log({ user });
+        if(_journal.branch_ID) {
+          const branch = await this.branchRepository.findOne({
+            where: { id: _journal.branch_ID},
+          });
+          journal.branch = [branch];
+        }
+
+        if(_journal.accounting_ID) {
+          const accounting = await this.accountingRepository.findOne({
+            where: { id: _journal.accounting_ID},
+          });
+          journal.accounting = [accounting];
+        }
+
         return this.journalRepository.save(journal);
       }
     

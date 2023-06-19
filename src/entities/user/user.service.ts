@@ -10,6 +10,8 @@ import { Attendant } from '../attendant/attendant.entity';
 import { AttendantRepository } from '../attendant/attendant.repository';
 import { Branch } from '../branch/branch.entity';
 import { BranchRepository } from '../branch/branch.repository';
+import { BetsRepository } from '../bets/bets.repository';
+import { Bets } from '../bets/bets.entity';
 
 @Injectable()
 export class UserService {
@@ -18,14 +20,15 @@ export class UserService {
     private userRepository: UserRepository,
     @InjectRepository(Attendant)
     private attendantRepository: AttendantRepository,
-    // @InjectRepository(Branch)
-    // private branchRepository: BranchRepository,
-  ) 
-  {}
+    @InjectRepository(Branch)
+    private branchRepository: BranchRepository,
+    // @InjectRepository(Bets)
+    // private betsRepository: BetsRepository,
+  ) {}
 
   findAll(): Promise<User[]> {
     return this.userRepository.find({
-      relations: ['attendant'],
+      relations: ['attendant', 'branch']
     });
   }
 
@@ -34,7 +37,7 @@ export class UserService {
       where: {
         id: id,
       },
-      relations: ['attendant']
+      relations: ['attendant', 'branch']
     });
     return x;
   }
@@ -50,18 +53,29 @@ export class UserService {
     user.daily_rental = _user.daily_rental;
     user.status = _user.status
 
-    const attendant = await this.attendantRepository.findOne({
-      where: { id: parseInt(_user.attendant) },
-    });
-    // const branch = await this.branchRepository.findOne({
-    //   where: { id: parseInt(_user.branch) },
-    // });
-    user.attendant= [attendant];
-    // user.branch = [branch];
-    console.log({ user });
-    return this.userRepository.save(user);
+    if(_user.branch_ID) {
+      const branch = await this.branchRepository.findOne({
+        where: { id: _user.branch_ID},
+      });
+      user.branch = [branch];
+    }
+      
+    if(_user.attendant_ID) {
+      const attendant = await this.attendantRepository.findOne({
+        where: { id: _user.attendant_ID},
+      });
+      user.attendant = [attendant];
+    }
 
-  }
+    // if(_user.bets_ID) {
+    //   const bets = await this.betsRepository.findOne({
+    //     where: { id: _user.bets_ID},
+    //   });
+    //   user.bets = [bets];
+    // }
+
+    return this.userRepository.save(user);
+  }  
 
   async update(
     id: number,
@@ -72,7 +86,7 @@ export class UserService {
     //   where: { id: parseInt(updateUserDto.branch) },
     // });
     const attendant = await this.attendantRepository.findOne({
-      where: { id: parseInt(updateUserDto.attendant) },
+      where: { id: updateUserDto.attendant },
     });
     console.log({
       user,

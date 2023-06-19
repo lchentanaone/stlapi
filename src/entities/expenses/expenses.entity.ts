@@ -5,7 +5,10 @@ import {
     PrimaryGeneratedColumn,
     JoinTable,
     BaseEntity,
+    ManyToMany,
   } from 'typeorm';
+  import { User } from '../user/user.entity';
+
   
 @Entity({ name: 'expenses' })
   export class Expenses extends BaseEntity {
@@ -21,5 +24,7 @@ import {
     @Column()
     type: string;
 
-
+    @ManyToMany(() => User, (user) => user.expenses)
+    @JoinTable()
+    user: User[];
   }

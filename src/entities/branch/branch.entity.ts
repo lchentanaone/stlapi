@@ -8,6 +8,9 @@ import {
   JoinTable,
 } from 'typeorm';
 import { Attendant } from '../attendant/attendant.entity';
+import { User } from '../user/user.entity';
+import { Journal } from '../journal/journal.entity';
+
 
 @Entity({ name: 'branch' })
 export class Branch extends BaseEntity {
@@ -29,4 +32,10 @@ export class Branch extends BaseEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToMany(() => User, (user) => user.branch)
+  user: User[];
+
+  @ManyToMany(() => Journal, (journal) => journal.branch)
+  journal: Journal[];
 }

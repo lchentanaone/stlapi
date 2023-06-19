@@ -14,14 +14,14 @@ export class ExpensesService {
   constructor(
     @InjectRepository(Expenses)
     private expensesRepository: ExpensesRepository,
-    // @InjectRepository(User)
-    // private userRepository: UserRepository,
+    @InjectRepository(User)
+    private userRepository: UserRepository,
   ) 
   {}
 
   async findAll(): Promise<Expenses[]> {
     return this.expensesRepository.find({
-      relations: ['expenses'],
+      relations: ['user'],
     });
   }
 
@@ -30,7 +30,7 @@ export class ExpensesService {
       where: {
         id: id,
       },
-    //   relations: ['user_id']
+      relations: ['user']
     });
     return x;
   }
@@ -41,16 +41,12 @@ export class ExpensesService {
     expenses.amount = _expenses.amount;
     expenses.type = _expenses.type;
     
-
-    // const attendant = await this.attendantRepository.findOne({
-    //   where: { id: parseInt(_user.attendant_id) },
-    // });
-    // const branch = await this.branchRepository.findOne({
-    //   where: { id: parseInt(_user.branch_code) },
-    // });
-    // user.attendant_id= [attendant];
-    // user.branch_code = [branch];
-    // console.log({ user });
+    if(_expenses.user_ID) {
+      const user = await this.userRepository.findOne({
+        where: { id: _expenses.user_ID},
+      });
+      expenses.user = [user];
+    }
     return this.expensesRepository.save(expenses);
 
   }

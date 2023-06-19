@@ -17,8 +17,8 @@ export class CreateTapadaDto {
   @IsOptional()
   draw_time: string; 
 
-  // @IsInt()
-  // user_id: number;
+  @IsInt()
+  user_ID: number;
 
   @IsDate()
   createdAt: Date;

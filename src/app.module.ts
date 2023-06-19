@@ -6,7 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { Branch } from './entities/branch/branch.entity';
 import { BranchModule } from './entities/branch/branch.module';
 import { Attendant } from './entities/attendant/attendant.entity';
-import { AttendantModule } from './entities/attendant/attendant.module';
+import AttendantModule from './entities/attendant/attendant.module';
 import { User } from './entities/user/user.entity';
 import { UserModule } from './entities/user/user.module';
 import { Lotto } from './entities/lotto_result/lotto.entity';

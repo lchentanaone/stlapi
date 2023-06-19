@@ -8,8 +8,8 @@ export class CreateJournalDto {
   @IsOptional()
   date: string;
 
-  // @IsInt()
-  // branch_code: number; // FK
+  @IsInt()
+  branch_ID: number; // FK
 
   @IsString()
   description: string;
@@ -17,8 +17,8 @@ export class CreateJournalDto {
   @IsOptional()
   type: string; 
 
-  // @IsInt()
-  // accounting_chart: number;
+  @IsInt()
+  accounting_ID: number;
 
   @IsInt()
   amount: number;

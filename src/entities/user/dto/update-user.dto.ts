@@ -7,11 +7,14 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsInt()
   id: number;
 
-  // @IsString()
-  // branch_code: string;
+  @IsInt()
+  branch: number;
 
-  @IsString()
-  attendant: string;
+  @IsInt()
+  attendant: number;
+
+  @IsInt()
+  bets: number;
 
   @IsString()
   username: string;

@@ -22,8 +22,8 @@ export class UpdateBetsDto extends PartialType(CreateBetsDto) {
   @IsInt()
   amount: number;
 
-  // @IsInt()
-  // user_id: number;
+  @IsInt()
+  user_ID: number;
 
   @IsDate()
   createdAt: Date;
