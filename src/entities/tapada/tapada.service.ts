@@ -56,20 +56,19 @@ export class TapadaService {
         updateTapadaDto: UpdateTapadaDto,
       ): Promise<Tapada> {
         const tapada = await this.findOne(id);
-        // const user = await this.userRepository.findOne({
-        //   where: { id: parseInt(updateTapadaDto.user) },
-        // });
-        console.log({
-          tapada,
-          updateTapadaDto,
-        });
-        const { date, runner_name, amount, draw_time} = updateTapadaDto;
+        
+        const { date, runner_name, amount, draw_time, user_ID} = updateTapadaDto;
         tapada.date = date;
         tapada.runner_name = runner_name;
         tapada.amount = amount;
         tapada.draw_time = draw_time;
 
-        // tapada.user_id = [User];
+        if(user_ID) {
+          const user = await this.userRepository.findOne({
+            where: { id: user_ID },
+          });
+          tapada.user = [user];
+        }
     
         return await tapada.save();
       }

@@ -26,16 +26,16 @@ export class Branch extends BaseEntity {
   @Column()
   address: string;
 
-  @ManyToMany(() => Attendant, (attendant) => attendant.branch)
+  @ManyToMany(() => Attendant, (attendant) => attendant.branch, { onDelete: 'CASCADE' })
   @JoinTable()
   attendant: Attendant[];
 
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToMany(() => User, (user) => user.branch)
+  @ManyToMany(() => User, (user) => user.branch, { onDelete: 'CASCADE' })
   user: User[];
 
-  @ManyToMany(() => Journal, (journal) => journal.branch)
+  @ManyToMany(() => Journal, (journal) => journal.branch, { onDelete: 'CASCADE' })
   journal: Journal[];
 }

@@ -7,14 +7,21 @@ import {
     Delete,
     Patch,
     Res,
+    forwardRef,
+    Inject,
   } from '@nestjs/common';
   import { CreateAccountingDto } from './dto/create-accounting.dto';
   import { UpdateAccountingDto } from './dto/update-accounting.dto';
   import { AccountingService } from './accounting.service';
+  import { JournalService } from '../journal/journal.service';
   
   @Controller('accounting')
   export class AccountingController {
-    constructor(private accountingService: AccountingService) {}
+    constructor(
+      private accountingService: AccountingService,
+      @Inject(forwardRef(() => JournalService))
+      private readonly branchService: JournalService,
+    ) {}
   
     @Get()
     async findAll() {

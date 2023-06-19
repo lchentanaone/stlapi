@@ -53,21 +53,22 @@ export class ExpensesService {
 
   async update(
     id: number,
-    expensesData: UpdateExpensesDto,
+    updateExpensesDto: UpdateExpensesDto,
   ) : Promise<Expenses> {
     const expenses = await this.findOne(id);
-    // const user = await this.userRepository.findOne({
-    //   where: { id: parseInt(updateExpensesDto.user_id) },
-    // });
-    // console.log({
-    //   expenses,
-    //   updateExpensesDto,
-    // });
-    // const { date, amount, type } = updateExpensesDto;
-    // expenses.date = date;
-    // expenses.amount = amount;
-    // expenses.type = type;
+   
+    const { date, amount, type, user_ID } = updateExpensesDto;
+    expenses.date = date;
+    expenses.amount = amount;
+    expenses.type = type;
     
+    if(user_ID) {
+      const user = await this.userRepository.findOne({
+        where: { id: user_ID },
+      });
+      expenses.user = [user];
+    }
+
     return await expenses.save();
   }
  

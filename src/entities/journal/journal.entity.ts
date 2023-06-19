@@ -18,7 +18,7 @@ import { Accounting } from '../accounting_charts/accounting.entity';
     @Column()
     date: string;
 
-    @ManyToMany(() => Branch, (branch) => branch.journal)
+    @ManyToMany(() => Branch, (branch) => branch.journal, { onDelete: 'CASCADE' })
     @JoinTable()
     branch: Branch[];
 
@@ -28,7 +28,7 @@ import { Accounting } from '../accounting_charts/accounting.entity';
     @Column()
     type: string; 
 
-    @ManyToMany(() => Accounting, (accounting) => accounting.journal)
+    @ManyToMany(() => Accounting, (accounting) => accounting.journal, { onDelete: 'CASCADE' })
     @JoinTable()
     accounting: Accounting[];
 

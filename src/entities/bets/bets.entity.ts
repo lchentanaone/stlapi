@@ -30,7 +30,7 @@ import {
     @Column()
     amount: number;
 
-    @ManyToMany(() => User, (user) => user.bets)
+    @ManyToMany(() => User, (user) => user.bets, { onDelete: 'CASCADE' })
     @JoinTable()
     user: User[];
 

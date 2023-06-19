@@ -27,7 +27,7 @@ import { User } from '../user/user.entity';
     @Column()
     draw_time: string; 
 
-    @ManyToMany(() => User, (user) => user.tapada)
+    @ManyToMany(() => User, (user) => user.tapada, { onDelete: 'CASCADE' })
     @JoinTable()
     user: User[];
    

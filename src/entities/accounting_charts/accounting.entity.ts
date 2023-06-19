@@ -4,9 +4,8 @@ import {
     CreateDateColumn,
     Entity,
     PrimaryGeneratedColumn,
-    ManyToMany,
-    JoinTable,
     BaseEntity,
+    ManyToMany
   } from 'typeorm';
 import { Journal } from '../journal/journal.entity';
   
@@ -27,8 +26,9 @@ import { Journal } from '../journal/journal.entity';
     @Column()
     type: string;
    
-    @ManyToMany(() => Journal, (journal) => journal.accounting)
+    @ManyToMany(() => Journal, (journal) => journal.accounting, { onDelete: 'CASCADE' })
     journal: Journal[];
+
 
   }
   

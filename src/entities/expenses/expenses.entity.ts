@@ -24,7 +24,7 @@ import {
     @Column()
     type: string;
 
-    @ManyToMany(() => User, (user) => user.expenses)
+    @ManyToMany(() => User, (user) => user.expenses, { onDelete: 'CASCADE' })
     @JoinTable()
     user: User[];
   }

@@ -20,21 +20,21 @@ import { Tapada } from '../tapada/tapada.entity';
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToMany(() => Branch, (branch) => branch.user)
+    @ManyToMany(() => Branch, (branch) => branch.user, { onDelete: 'CASCADE' })
     @JoinTable()
     branch: Branch[];
 
-    @ManyToMany(() => Attendant, (attendant) => attendant.user)
+    @ManyToMany(() => Attendant, (attendant) => attendant.user, { onDelete: 'CASCADE' })
     @JoinTable()
     attendant: Attendant[];
 
-    @ManyToMany(() => Bets, (bets) => bets.user)
+    @ManyToMany(() => Bets, (bets) => bets.user, { onDelete: 'CASCADE' })
     bets: Bets[];
 
-    @ManyToMany(() => Expenses, (expenses) => expenses.user)
+    @ManyToMany(() => Expenses, (expenses) => expenses.user, { onDelete: 'CASCADE' })
     expenses: Expenses[];
 
-    @ManyToMany(() => Tapada, (tapada) => tapada.user)
+    @ManyToMany(() => Tapada, (tapada) => tapada.user, { onDelete: 'CASCADE' })
     tapada: Tapada [];
 
     @Column()

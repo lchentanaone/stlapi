@@ -26,10 +26,10 @@ export class Attendant extends BaseEntity {
   @Column()
   password: string;
 
-  @ManyToMany(() => Branch, (branch) => branch.attendant)
+  @ManyToMany(() => Branch, (branch) => branch.attendant, { onDelete: 'CASCADE' })
   branch: Branch[];
 
-  @ManyToMany(() => User, (user) => user.attendant)
+  @ManyToMany(() => User, (user) => user.attendant, { onDelete: 'CASCADE' })
   user: User[];
 
   @CreateDateColumn()

@@ -8,6 +8,9 @@ export class UpdateExpensesDto extends PartialType(CreateExpensesDto) {
   
     @IsString()
     date: string;
+
+    @IsInt()
+    branch_ID: number; 
   
     @IsInt()
     amount: number;
@@ -16,7 +19,7 @@ export class UpdateExpensesDto extends PartialType(CreateExpensesDto) {
     type: string;
 
     @IsInt()
-    user_ID: number; 
+    accounting_ID: number; 
   
     @IsDate()
     createdAt: Date;

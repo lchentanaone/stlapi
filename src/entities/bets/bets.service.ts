@@ -56,19 +56,20 @@ export class BetsService {
     updateBetsDto: UpdateBetsDto,
   ): Promise<Bets> {
     const bets = await this.findOne(id);
-    // const user = await this.userRepository.findOne({
-    //   where: { id: updateBetsDto.user },
-    // });
-    // console.log({
-    //   bets,
-    //   updateBetsDto,
-    // });
-    // const { draw_time, game_mode, number } = updateBetsDto;
-    // bets.draw_time = draw_time;
-    // bets.game_mode = game_mode;
-    // bets.number = number;
-
-    // bets.id = [user];
+    
+    const { date, draw_time, game_mode, number, amount, user_ID } = updateBetsDto;
+    bets.date = date;
+    bets.draw_time = draw_time;
+    bets.game_mode = game_mode;
+    bets.number = number;
+    bets.amount = amount;
+  
+    if(user_ID) {
+      const user = await this.userRepository.findOne({
+        where: { id: user_ID },
+      });
+      bets.user = [user];
+    }
 
     return await bets.save();
   }

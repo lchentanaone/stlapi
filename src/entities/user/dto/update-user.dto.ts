@@ -8,10 +8,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   id: number;
 
   @IsInt()
-  branch: number;
+  branch_ID: number;
 
   @IsInt()
-  attendant: number;
+  attendant_ID: number;
 
   @IsInt()
   bets: number;

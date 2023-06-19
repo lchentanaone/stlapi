@@ -15,7 +15,6 @@ import {
   import { UpdateUserDto } from './dto/update-user.dto';
   import { BranchService } from '../branch/branch.service';
   import { AttendantService } from '../attendant/attendant.service';
-  import { BetsService } from '../bets/bets.service';
   
   @Controller('user')
   export class UserController {

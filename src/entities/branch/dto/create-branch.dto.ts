@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { IsString, IsInt, IsDate, IsIn } from '@nestjs/class-validator';
-import { Branch } from 'src/entities/branch/branch.entity';
 
 export class CreateBranchDto {
   @IsInt()

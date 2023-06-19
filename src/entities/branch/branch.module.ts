@@ -22,6 +22,7 @@ import { Journal } from '../journal/journal.entity';
 import { JournalRepository } from '../journal/journal.repository';
 import { Accounting } from '../accounting_charts/accounting.entity';
 import { AccountingRepository } from '../accounting_charts/accounting.repository';
+import { AccountingService } from '../accounting_charts/accounting.service';
 
 @Module({
   imports: [
@@ -45,6 +46,6 @@ import { AccountingRepository } from '../accounting_charts/accounting.repository
     ]),
   ],
   controllers: [BranchController],
-  providers: [BranchService, AttendantService, UserService, JournalService ]
+  providers: [BranchService, AttendantService, UserService, JournalService, AccountingService ]
 })
 export class BranchModule {}

@@ -16,8 +16,8 @@ export class UpdateAttendantDto extends PartialType(CreateAttendantDto) {
   @IsOptional()
   password: string;
 
-  @IsOptional()
-  branch: string;
+  @IsInt()
+  branch_ID: number;
 
   @IsDate()
   createdAt: Date;

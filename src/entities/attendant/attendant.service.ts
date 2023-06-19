@@ -50,23 +50,20 @@ export class AttendantService {
     
   }
 
-  async update(
-    id: number,
-    updateAttendantDto: UpdateAttendantDto,
-  ): Promise<Attendant> {
+  async update(id: number, updateAttendantDto: UpdateAttendantDto): Promise<Attendant> {
     const attendant = await this.findOne(id);
-    const branch = await this.branchRepository.findOne({
-      where: { id: parseInt(updateAttendantDto.branch) },
-    });
-    console.log({
-      attendant,
-      updateAttendantDto,
-    });
-    const { name, username, password } = updateAttendantDto;
+ 
+    const { name, username, password, branch_ID } = updateAttendantDto;
     attendant.name = name;
     attendant.username = username;
     attendant.password = password;
-    attendant.branch = [branch];
+    
+    if(branch_ID) {
+      const branch = await this.branchRepository.findOne({
+        where: { id: branch_ID },
+      });
+      attendant.branch = [branch];
+    }
 
     return await attendant.save();
   }

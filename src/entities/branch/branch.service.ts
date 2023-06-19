@@ -51,18 +51,18 @@ export class BranchService {
 
   async update(id: number, updateBranchDto: UpdateBranchDto): Promise<Branch> {
     const branch = await this.findOne(id);
-    const attendant = await this.attendantRepository.findOne({
-      where: { id: parseInt(updateBranchDto.attendant) },
-    });
-    console.log({
-      branch,
-      updateBranchDto,
-    });
-    const { code, name, address } = updateBranchDto;
+    
+    const { code, name, address, attendant_ID } = updateBranchDto;
     branch.code = code;
     branch.name = name;
     branch.address = address;
-    branch.attendant = [attendant];
+  
+    if(attendant_ID) {
+      const attendant = await this.attendantRepository.findOne({
+        where: { id: attendant_ID },
+      });
+      branch.attendant = [attendant];
+    }
 
     return await branch.save();
   }

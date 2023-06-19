@@ -65,21 +65,27 @@ export class JournalService {
         updateJournalDto: UpdateJournalDto,
       ): Promise<Journal> {
         const journal = await this.findOne(id);
-        // const journal = await this.journalRepository.findOne({
-        //   where: { id: parseInt(updateUserDto.journal) },
-        // });
-        console.log({
-          journal,
-          updateJournalDto,
-        });
-        const { date, description, type, amount} = updateJournalDto;
+        
+        const { date, branch_ID, description, type, accounting_ID, amount} = updateJournalDto;
         journal.date = date;
         journal.description = description;
         journal.type = type;
         journal.amount = amount;
 
-        // journal.user = [User];
+        if(branch_ID) {
+          const branch = await this.branchRepository.findOne({
+            where: { id: branch_ID },
+          });
+          journal.branch = [branch];
+        }
     
+        if(accounting_ID) {
+          const accounting = await this.accountingRepository.findOne({
+            where: { id: accounting_ID },
+          });
+          journal.accounting = [accounting];
+        }
+
         return await journal.save();
       }
     

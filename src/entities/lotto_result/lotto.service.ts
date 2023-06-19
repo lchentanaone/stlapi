@@ -23,7 +23,6 @@ export class LottoService {
       where: {
         id: id,
       },
-      // relations: ['']
     });
     return x;
   }
@@ -35,10 +34,6 @@ export class LottoService {
     lotto.game_mode = _lotto.game_mode;
     lotto.number = _lotto.number;
 
-    // const attendant = await this.attendantRepository.findOne({
-    //   where: { id: parseInt(_user.attendant) },
-    // });
-    // user.attendant = [attendant];
     console.log({ lotto });
     return this.lottoRepository.save(lotto);
   }
@@ -48,13 +43,7 @@ export class LottoService {
     updateLottoDto: UpdateLottoDto,
   ): Promise<Lotto> {
     const lotto = await this.findOne(id);
-    // const attendant = await this.attendantRepository.findOne({
-    //   where: { id: parseInt(updateUserDto.attendant) },
-    // });
-    console.log({
-      lotto,
-      updateLottoDto,
-    });
+
     const { draw_time, game_mode, number} = updateLottoDto;
     lotto.draw_time = draw_time;
     lotto.game_mode = game_mode;

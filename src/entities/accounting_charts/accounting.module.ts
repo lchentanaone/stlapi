@@ -7,8 +7,8 @@ import { AccountingRepository } from './accounting.repository';
 import { Journal } from '../journal/journal.entity';
 import { JournalRepository } from '../journal/journal.repository';
 import { JournalService } from '../journal/journal.service';
-import { BranchRepository } from '../branch/branch.repository';
 import { Branch } from '../branch/branch.entity';
+import { BranchRepository } from '../branch/branch.repository';
 
 @Module({
   imports: [
@@ -18,7 +18,8 @@ import { Branch } from '../branch/branch.entity';
       Journal,
       JournalRepository,
       Branch,
-      BranchRepository
+      BranchRepository,
+    
     ]),
   ],
   controllers: [AccountingController],
