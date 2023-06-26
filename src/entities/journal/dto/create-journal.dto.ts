@@ -5,8 +5,8 @@ export class CreateJournalDto {
   @IsInt()
   id: number;
 
-  @IsOptional()
-  date: string;
+  @IsDate()
+  date: Date;
 
   @IsInt()
   branch_ID: number; // FK

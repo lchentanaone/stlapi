@@ -16,13 +16,16 @@ import {
     id: number;
   
     @Column()
-    date: string;
-
-    @Column()
-    amount: number;
+    date: Date;
 
     @Column()
     type: string;
+
+    @Column()
+    status: string;
+
+    @Column()
+    amount: number;
 
     @ManyToMany(() => User, (user) => user.expenses, { onDelete: 'CASCADE' })
     @JoinTable()

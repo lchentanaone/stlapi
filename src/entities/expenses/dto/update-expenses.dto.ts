@@ -6,20 +6,20 @@ export class UpdateExpensesDto extends PartialType(CreateExpensesDto) {
     @IsInt()
     id: number;
   
-    @IsString()
-    date: string;
-
-    @IsInt()
-    branch_ID: number; 
-  
-    @IsInt()
-    amount: number;
+    @IsDate()
+    date: Date;
   
     @IsOptional()
     type: string;
 
+    @IsOptional()
+    status: string;
+
     @IsInt()
-    accounting_ID: number; 
+    amount: number;
+  
+    @IsInt()
+    user_ID: number; 
   
     @IsDate()
     createdAt: Date;

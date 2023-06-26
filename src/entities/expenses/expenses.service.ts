@@ -38,8 +38,9 @@ export class ExpensesService {
   async create(_expenses: CreateExpensesDto): Promise<Expenses> {
     const expenses = new Expenses();
     expenses.date = _expenses.date;
-    expenses.amount = _expenses.amount;
     expenses.type = _expenses.type;
+    expenses.status = _expenses.status;
+    expenses.amount = _expenses.amount;
     
     if(_expenses.user_ID) {
       const user = await this.userRepository.findOne({
@@ -57,10 +58,11 @@ export class ExpensesService {
   ) : Promise<Expenses> {
     const expenses = await this.findOne(id);
    
-    const { date, amount, type, user_ID } = updateExpensesDto;
+    const { date, amount, type, status, user_ID } = updateExpensesDto;
     expenses.date = date;
-    expenses.amount = amount;
     expenses.type = type;
+    expenses.status = status;
+    expenses.amount = amount;
     
     if(user_ID) {
       const user = await this.userRepository.findOne({

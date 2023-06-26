@@ -21,6 +21,7 @@ import { Journal } from './entities/journal/journal.entity';
 import { JournalModule } from './entities/journal/journal.module';
 import { AccountingModule } from './entities/accounting_charts/accounting.module';
 import { Accounting } from './entities/accounting_charts/accounting.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -47,6 +48,7 @@ import { Accounting } from './entities/accounting_charts/accounting.entity';
     TapadaModule,
     JournalModule,
     AccountingModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

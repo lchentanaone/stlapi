@@ -5,14 +5,17 @@ export class CreateExpensesDto {
   @IsInt()
   id: number;
 
-  @IsString()
-  date: string;
-
-  @IsInt()
-  amount: number;
+  @IsDate()
+  date: Date;
 
   @IsOptional()
   type: string;
+
+  @IsOptional()
+  status: string;
+
+  @IsInt()
+  amount: number;
 
   @IsInt()
   user_ID: number; 

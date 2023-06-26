@@ -17,6 +17,9 @@ export class CreateAccountingDto {
   @IsOptional()
   type: string;
 
+  @IsInt()
+  journal_ID: number;
+
   @IsDate()
   createdAt: Date;
 }
