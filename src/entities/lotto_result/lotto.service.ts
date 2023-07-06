@@ -26,6 +26,14 @@ export class LottoService {
     });
     return x;
   }
+
+  async findByDate(date: Date): Promise<Lotto[]> {
+    return await this.lottoRepository.find({
+      where: {
+        date
+      },
+    });
+  }
   
   async create(_lotto: CreateLottoDto): Promise<Lotto> {
     const lotto = new Lotto();

@@ -10,13 +10,16 @@ export class UpdateLottoDto extends PartialType(CreateLottoDto) {
   @IsDate()
   date: Date;
 
-  @IsDate()
-  draw_time: Date;
+  @IsString()
+  draw_time: String;
 
   @IsString()
   game_mode: string; 
 
   @IsInt()
   number: number;
+
+  @IsDate()
+  createdAt: Date;
 
 }

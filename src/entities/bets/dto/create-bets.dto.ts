@@ -5,10 +5,10 @@ export class CreateBetsDto {
   @IsInt()
   id: number;
 
-  @IsOptional()
-  date: string;
+  @IsDate()
+  date: Date
 
-  @IsOptional()
+  @IsString()
   draw_time: string;
 
   @IsOptional()

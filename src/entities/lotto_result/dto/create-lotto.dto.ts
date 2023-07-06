@@ -8,8 +8,8 @@ export class CreateLottoDto {
   @IsDate()
   date: Date;
 
-  @IsDate()
-  draw_time: Date;
+  @IsString()
+  draw_time: String;
 
   @IsString()
   game_mode: string; 

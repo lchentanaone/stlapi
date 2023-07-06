@@ -34,6 +34,14 @@ export class BetsService {
     return x;
   }
 
+   async findByDate(date: Date): Promise<Bets[]> {
+    return await this.betsRepository.find({
+      where: {
+        date
+      },
+    });
+  }
+
   async create(_bets: CreateBetsDto): Promise<Bets> {
     const bets = new Bets();
     bets.date = _bets.date;

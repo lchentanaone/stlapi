@@ -34,6 +34,11 @@ import {
       return this.betsService.findOne(+id);
     }
   
+    @Get('date/:date')
+    async findByDate(@Param('date') date: Date) {
+      return this.betsService.findByDate(date);
+    }
+
     @Post()
     create(@Body() createBetsDto: CreateBetsDto) {
       return this.betsService.create(createBetsDto);

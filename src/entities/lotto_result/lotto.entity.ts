@@ -17,7 +17,7 @@ import {
     date: Date;
   
     @Column()
-    draw_time: Date;
+    draw_time: String;
   
     @Column()
     game_mode: string; 
@@ -25,7 +25,8 @@ import {
     @Column()
     number: number;
  
-
+    @CreateDateColumn()
+    createdAt: Date;
    
   }
   

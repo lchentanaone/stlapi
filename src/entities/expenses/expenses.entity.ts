@@ -30,4 +30,7 @@ import {
     @ManyToMany(() => User, (user) => user.expenses, { onDelete: 'CASCADE' })
     @JoinTable()
     user: User[];
+
+    @CreateDateColumn()
+    createdAt: Date;
   }

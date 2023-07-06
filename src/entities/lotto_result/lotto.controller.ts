@@ -25,6 +25,11 @@ import {
     async findOne(@Param('id') id: number) {
       return this.lottoService.findOne(+id);
     }
+
+    @Get('date/:date')
+    async findByDate(@Param('date') date: Date) {
+      return this.lottoService.findByDate(date);
+    }
   
     @Post()
     create(@Body() createLottoDto: CreateLottoDto) {

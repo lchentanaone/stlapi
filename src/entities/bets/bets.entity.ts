@@ -16,7 +16,7 @@ import {
     id: number;
   
     @Column()
-    date: string;
+    date: Date;
   
     @Column()
     draw_time: string;
@@ -34,5 +34,7 @@ import {
     @JoinTable()
     user: User[];
 
+    @CreateDateColumn()
+    createdAt: Date;
   }
   

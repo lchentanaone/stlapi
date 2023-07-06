@@ -28,7 +28,9 @@ import { Journal } from '../journal/journal.entity';
    
     @ManyToMany(() => Journal, (journal) => journal.accounting, { onDelete: 'CASCADE' })
     journal: Journal[];
-
+   
+    @CreateDateColumn()
+    createdAt: Date;
 
   }
   

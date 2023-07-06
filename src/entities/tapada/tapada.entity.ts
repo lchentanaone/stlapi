@@ -16,7 +16,7 @@ import { User } from '../user/user.entity';
     id: number;
   
     @Column()
-    date: string;
+    date: Date;
 
     @Column()
     runner_name: string;
@@ -31,4 +31,6 @@ import { User } from '../user/user.entity';
     @JoinTable()
     user: User[];
    
+    @CreateDateColumn()
+    createdAt: Date;
   }

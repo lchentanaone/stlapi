@@ -34,5 +34,8 @@ import { Accounting } from '../accounting_charts/accounting.entity';
 
     @Column()
     amount: number; 
+
+    @CreateDateColumn()
+    createdAt: Date;
    
   }

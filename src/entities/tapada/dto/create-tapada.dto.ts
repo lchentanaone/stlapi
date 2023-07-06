@@ -5,8 +5,8 @@ export class CreateTapadaDto {
   @IsInt()
   id: number;
 
-  @IsOptional()
-  date: string;
+  @IsDate()
+  date: Date;
 
   @IsString()
   runner_name: string;
@@ -14,7 +14,7 @@ export class CreateTapadaDto {
   @IsInt()
   amount: number;
 
-  @IsOptional()
+  @IsString()
   draw_time: string; 
 
   @IsInt()
