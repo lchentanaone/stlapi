@@ -29,6 +29,14 @@ export class UserService {
     });
   }
 
+  userCredential(query: object | any): Promise<User> {
+    const x = this.userRepository.findOne({
+      where: query,
+      relations: ['attendant', 'branch'],
+    });
+    return x;
+  }
+
   async findOne(id: number): Promise<User> {
     const x = this.userRepository.findOne({
       where: {

@@ -1,12 +1,15 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from 'src/authentication/auth.module';
+import { ConfigModule } from '@nestjs/config';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import { Branch } from './entities/branch/branch.entity';
 import { BranchModule } from './entities/branch/branch.module';
 import { Attendant } from './entities/attendant/attendant.entity';
-import AttendantModule from './entities/attendant/attendant.module';
+import  AttendantModule  from './entities/attendant/attendant.module';
 import { User } from './entities/user/user.entity';
 import { UserModule } from './entities/user/user.module';
 import { Lotto } from './entities/lotto_result/lotto.entity';
@@ -21,7 +24,6 @@ import { Journal } from './entities/journal/journal.entity';
 import { JournalModule } from './entities/journal/journal.module';
 import { AccountingModule } from './entities/accounting_charts/accounting.module';
 import { Accounting } from './entities/accounting_charts/accounting.entity';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -30,15 +32,28 @@ import { AuthModule } from './auth/auth.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DATABASE_HOST,
       port: 3306,
-      username: 'root',
-      password: '159753@Ed',
-      database: 'stlapi',
-      entities: [Branch, Attendant, User, Lotto, Bets, Expenses, Journal, Tapada, Accounting ],
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
+      entities: [
+        // general
+        Branch, 
+        Attendant, 
+        User, 
+        Lotto, 
+        Bets, 
+        Expenses, 
+        Journal, 
+        Tapada, 
+        Accounting 
+      ],
       synchronize: true,
       autoLoadEntities: true,
     }),
+    // general
+    AuthModule,
     BranchModule,
     AttendantModule,
     UserModule,

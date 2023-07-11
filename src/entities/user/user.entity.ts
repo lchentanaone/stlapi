@@ -13,7 +13,7 @@ import { Branch } from '../branch/branch.entity';
 import { Bets } from '../bets/bets.entity';
 import { Expenses } from '../expenses/expenses.entity';
 import { Tapada } from '../tapada/tapada.entity';
-
+import { IsOptional } from '@nestjs/class-validator';
 
   @Entity({ name: 'user' })
   export class User extends BaseEntity {
