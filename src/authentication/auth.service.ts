@@ -1,5 +1,5 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
-import { UserService } from 'src/entities/user/user.service';
+import { UserService } from '../entities/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -11,7 +11,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.userService.userCredential({ email: email });
+    const user = await this.userService.userCredential({ username: email });
     if (!user) return null;
     const passwordValid = await bcrypt.compare(password, user.password);
     if (!user) {
@@ -24,26 +24,25 @@ export class AuthService {
   }
 
   async login(user: any) {
-    console.log(this.login)
     const payload = {
       userPayload: {
         id: user.user.id,
-        role: user.user.role,
         username: user.user.username,
         password: user.user.password,
-        first_name: user.user.first_name,
-        middle_name: user.user.middle_name,
-        last_name: user.user.last_name,
+        firstName: user.user.first_name,
+        middleName: user.user.middle_name,
+        lastName: user.user.last_name,
         position: user.user.position,
-        daily_rental: user.user.daily_rental,
         status: user.user.status,
+        dailyRental: user.user.daily_rental,
         created_at: user.user.created_at,
       },
     };
     return {
       access_token: this.jwtService.sign(payload),
-      branch_id: user.user.branch?.id,
-      attendant_id: user.user.attendant?.id,
+      // store_Id: user.user.store?.id,
+      Branch_Id: user.user.branch?.id,
+
     };
   }
 
